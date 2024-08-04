@@ -34,6 +34,7 @@ const addTrain = async (req, res) => {
 
 const getTrains = async (req, res) => {
   const { source, destination } = req.query;
+  console.log(source, destination);
 
   try {
     const trains = await getTrainsFromSourceToDestination(source, destination);

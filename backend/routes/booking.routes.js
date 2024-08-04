@@ -6,3 +6,5 @@ const authMiddleWare = require("../middlewares/authMiddleWare");
 router.post("/book/:train_id", authMiddleWare, bookTicket);
 
 router.get("/:bookingId", authMiddleWare, getBooking);
+
+module.exports = router;

@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-const createUser = async (username, password, role = "user") => {
+const createUser = async (username, password, email, role = "user") => {
   const result = await pool.query(
     "INSERT INTO Users(username, password, email, role) VALUES($1, $2, $3, $4) RETURNING *",
     [username, password, email, role]

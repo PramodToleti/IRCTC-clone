@@ -9,7 +9,7 @@ const createTrain = async (
   arrival_time_at_destination
 ) => {
   const result = await pool.query(
-    "INSERT INTO Trains(train_name, source, destination, seat_capacity, arrival_time_at_source, arrival_time_at_destination) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+    "INSERT INTO Trains(train_name, source, destination, seat_capacity, available_seats, arrival_time_at_source, arrival_time_at_destination) VALUES($1, $2, $3, $4, $4, $5, $6) RETURNING *",
     [
       train_name,
       source,

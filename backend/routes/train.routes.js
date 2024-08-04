@@ -5,3 +5,5 @@ const checkAdmin = require("../middlewares/checkAdmin");
 
 router.post("/create", checkAdmin, addTrain);
 router.get("/availability", getTrains);
+
+module.exports = router;

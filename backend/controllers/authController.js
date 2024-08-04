@@ -18,7 +18,11 @@ const register = async (req, res) => {
       user_id: user.id,
     });
   } catch (e) {
-    res.status(400).json({ error: e.message });
+    console.log(e);
+    res.status(400).json({
+      status: e.message,
+      status_code: 400,
+    });
   }
 };
 
@@ -51,7 +55,10 @@ const login = async (req, res) => {
       access_token: token,
     });
   } catch (e) {
-    res.status(401).json({ error: e.message });
+    res.status(401).json({
+      status: e.message,
+      status_code: 401,
+    });
   }
 };
 

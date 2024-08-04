@@ -26,6 +26,7 @@ const getBooking = async (req, res) => {
       booking,
     });
   } catch (e) {
+    console.log(e);
     res.status(400).json({ error: e.message });
   }
 };
