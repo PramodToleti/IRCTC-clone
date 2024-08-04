@@ -5,9 +5,9 @@ services:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_USER=pramod
-      - POSTGRES_PASSWORD=pramu123
-      - POSTGRES_DB=railways
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
     ports:
       - "5432:5432"
     volumes:
