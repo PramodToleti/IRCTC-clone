@@ -8,6 +8,13 @@ require("dotenv").config();
 const register = async (req, res) => {
   const { username, password, email } = req.body;
 
+  if (password.length < 6) {
+    return res.status(400).json({
+      status: "Password must be at least 6 characters long",
+      status_code: 400,
+    });
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -52,6 +59,7 @@ const login = async (req, res) => {
       status: "Login successful",
       status_code: 200,
       user_id: user.id,
+      isAdmin: user.role === "admin",
       access_token: token,
     });
   } catch (e) {

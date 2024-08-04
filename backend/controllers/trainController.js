@@ -1,6 +1,7 @@
 const {
   createTrain,
   getTrainsFromSourceToDestination,
+  getPlaces,
 } = require("../models/train");
 
 const addTrain = async (req, res) => {
@@ -48,7 +49,21 @@ const getTrains = async (req, res) => {
   }
 };
 
+const getTrainPlaces = async (req, res) => {
+  try {
+    const places = await getPlaces();
+    res.status(200).json({
+      status: "Places fetched successfully",
+      status_code: 200,
+      places,
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
 module.exports = {
   addTrain,
   getTrains,
+  getTrainPlaces,
 };

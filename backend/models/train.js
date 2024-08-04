@@ -32,7 +32,18 @@ const getTrainsFromSourceToDestination = async (source, destination) => {
   return result.rows;
 };
 
+const getPlaces = async () => {
+  const result = await pool.query(`
+    SELECT DISTINCT source AS place FROM Trains
+    UNION
+    SELECT DISTINCT destination AS place FROM Trains;
+  `);
+  console.log(result.rows);
+  return result.rows;
+};
+
 module.exports = {
   createTrain,
   getTrainsFromSourceToDestination,
+  getPlaces,
 };
