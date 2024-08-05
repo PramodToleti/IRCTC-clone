@@ -13,7 +13,7 @@ const TrainCard = ({ key, train, handleSearch }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/bookings/book/${train.train_id}`,
+        `https://irctc-clone-pvdx.onrender.com/api/bookings/book/${train.train_id}`,
         {
           method: "POST",
           headers: {

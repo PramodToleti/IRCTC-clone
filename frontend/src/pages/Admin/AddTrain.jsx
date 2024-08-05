@@ -18,14 +18,17 @@ const AddTrain = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/trains/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("access_token")}`,
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "https://irctc-clone-pvdx.onrender.com/api/trains/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("access_token")}`,
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
       console.log(result);

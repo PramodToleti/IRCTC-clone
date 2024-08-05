@@ -18,7 +18,9 @@ const Home = () => {
   async function fetchPlaces() {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/trains/places");
+      const response = await fetch(
+        "https://irctc-clone-pvdx.onrender.com/api/trains/places"
+      );
       const data = await response.json();
       setPlaces(data?.places);
     } catch (error) {
@@ -39,7 +41,7 @@ const Home = () => {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/trains/availability?source=${source}&destination=${destination}`
+        `https://irctc-clone-pvdx.onrender.com/api/trains/availability?source=${source}&destination=${destination}`
       );
       const data = await response.json();
       console.log(data);

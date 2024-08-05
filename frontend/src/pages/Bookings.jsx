@@ -12,7 +12,7 @@ const Bookings = () => {
   const fetchAllBookings = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/bookings/user/${localStorage.getItem(
+        `https://irctc-clone-pvdx.onrender.com/api/bookings/user/${localStorage.getItem(
           "user_id"
         )}`,
         {
@@ -34,7 +34,7 @@ const Bookings = () => {
   const fetchSpecificBooking = async (bookingId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/bookings/${bookingId}`,
+        `https://irctc-clone-pvdx.onrender.com/api/bookings/${bookingId}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("access_token")}`,
