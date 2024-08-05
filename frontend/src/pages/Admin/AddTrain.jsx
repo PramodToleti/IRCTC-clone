@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddTrain = () => {
   const {
@@ -10,6 +11,8 @@ const AddTrain = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const token = Cookies.get("access_token");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
@@ -28,6 +31,7 @@ const AddTrain = () => {
       console.log(result);
       if (response.ok) {
         toast.success("Train Added Successfully");
+        navigate("/");
       } else {
         toast.error(result.error);
       }
@@ -38,6 +42,10 @@ const AddTrain = () => {
       setLoading(false);
     }
   };
+
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="bg-black h-screen p-6 px-24 overflow-y-scroll">

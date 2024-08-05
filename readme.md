@@ -9,3 +9,8 @@ A real-time railway management system similar to IRCTC. Users can check train av
 - **Frontend**: React.js, Tailwind CSS
 - **Backend**: Node.js, Express
 - **Database**: PostgreSQL
+
+## Admin Credentials
+
+- **Username**: admin
+- **Password**: admin@123

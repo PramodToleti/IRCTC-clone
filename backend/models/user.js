@@ -1,12 +1,22 @@
 const pool = require("../config/db");
 
 const createUser = async (username, password, email, role = "user") => {
-  const isExists = await pool.query("SELECT * FROM Users WHERE username = $1", [
-    username,
-  ]);
+  const isUsernameExists = await pool.query(
+    "SELECT * FROM Users WHERE username = $1",
+    [username]
+  );
 
-  if (isExists.rows.length > 0) {
-    throw new Error("User already exists");
+  const isEmailExists = await pool.query(
+    "SELECT * FROM Users WHERE email = $1",
+    [email]
+  );
+
+  if (isUsernameExists.rows.length > 0) {
+    throw new Error("Username already taken");
+  }
+
+  if (isEmailExists.rows.length > 0) {
+    throw new Error("Email already exists");
   }
 
   const result = await pool.query(

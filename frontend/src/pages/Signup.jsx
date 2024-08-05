@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -11,6 +11,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const token = Cookies.get("access_token");
   if (token) {
@@ -32,7 +33,7 @@ const Signup = () => {
       setLoading(false);
       if (response.ok) {
         toast.success("Account created successfully");
-        return <Navigate to="/login" />;
+        navigate("/login");
       } else {
         toast.error(result.status);
       }
@@ -87,10 +88,21 @@ const Signup = () => {
               type="password"
               id="password"
               className="mt-1 block w-full rounded-md  p-3 border border-gray-400 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                pattern: {
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                  message:
+                    "Password must be at least 8 characters long, contain one uppercase, one lowercase, one number, and one special character",
+                },
+              })}
             />
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">Password is required</p>
+              <p className="text-red-500 text-sm mt-1">
+                {" "}
+                {errors.password.message}
+              </p>
             )}
           </div>
           <button

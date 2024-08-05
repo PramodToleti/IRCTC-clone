@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Navbar from "../components/Navbar";
+import { Navigate } from "react-router-dom";
 
 const Bookings = () => {
+  const token = Cookies.get("access_token");
   const [bookings, setBookings] = useState([]);
   const [booking, setBooking] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -53,6 +55,10 @@ const Bookings = () => {
   useEffect(() => {
     fetchAllBookings();
   }, []);
+
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div className="bg-black h-screen p-6 px-24 overflow-y-scroll">
