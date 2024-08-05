@@ -32,7 +32,9 @@ const Login = () => {
       setLoading(false);
       if (response.ok) {
         Cookies.set("access_token", result.access_token);
+        localStorage.setItem("user_id", result.user_id);
         localStorage.setItem("isAdmin", result.isAdmin);
+        localStorage.setItem("username", result.username);
         toast.success("Login successful");
         setTimeout(() => {
           return <Navigate replace to="/" />;

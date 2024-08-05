@@ -59,6 +59,7 @@ const login = async (req, res) => {
       status: "Login successful",
       status_code: 200,
       user_id: user.id,
+      username: user.username,
       isAdmin: user.role === "admin",
       access_token: token,
     });

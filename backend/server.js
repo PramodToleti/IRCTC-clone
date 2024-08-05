@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 const authRoutes = require("./routes/auth.routes");
 const trainRoutes = require("./routes/train.routes");
 const bookingRoutes = require("./routes/booking.routes");
@@ -9,6 +10,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/trains", trainRoutes);

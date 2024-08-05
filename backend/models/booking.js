@@ -49,6 +49,15 @@ const bookSeat = async (user_id, train_id, no_of_seats) => {
   }
 };
 
+const getBookings = async (user_id) => {
+  const bookingsResult = await pool.query(
+    "SELECT id AS booking_id, no_of_seats, train_id, seat_numbers FROM Bookings WHERE user_id = $1",
+    [user_id]
+  );
+
+  return bookingsResult.rows;
+};
+
 const getBookingsById = async (bookingId) => {
   const bookingResult = await pool.query(
     "SELECT id AS booking_id, no_of_seats, train_id, seat_numbers, user_id FROM Bookings WHERE id = $1",
@@ -74,5 +83,6 @@ const getBookingsById = async (bookingId) => {
 
 module.exports = {
   bookSeat,
+  getBookings,
   getBookingsById,
 };

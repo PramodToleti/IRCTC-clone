@@ -1,4 +1,4 @@
-const { bookSeat, getBookingsById } = require("../models/booking");
+const { bookSeat, getBookingsById, getBookings } = require("../models/booking");
 
 const bookTicket = async (req, res) => {
   const { user_id, no_of_seats } = req.body;
@@ -11,6 +11,18 @@ const bookTicket = async (req, res) => {
       status_code: 201,
       booking_id: booking.id,
       seat_numbers: booking.seat_numbers,
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+const getAllBookings = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const bookings = await getBookings(user_id);
+    res.status(200).json({
+      bookings,
     });
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -33,5 +45,6 @@ const getBooking = async (req, res) => {
 
 module.exports = {
   bookTicket,
+  getAllBookings,
   getBooking,
 };
